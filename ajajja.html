@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>San Valentín Mágico</title>
+    <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #ff69b4;
+            --secondary-color: #ff1493;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #0a0a2a;
+            font-family: 'Montserrat', sans-serif;
+            overflow: hidden;
+            color: #fff;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(12px);
+            padding: 3rem;
+            border-radius: 20px;
+            max-width: 600px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #greeting {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.5em;
+            margin: 1em 0;
+            transition: all 1s ease;
+        }
+
+        #romantic-message {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2em;
+            line-height: 1.6;
+            position: absolute;
+            width: 100%;
+            left: 0;
+            padding: 2rem;
+            opacity: 0;
+            transform: translateY(50px);
+            transition: all 2s ease;
+        }
+
+        .comet {
+            position: absolute;
+            width: 150px;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                rgba(255,255,255,0) 0%,
+                rgba(255,255,255,1) 50%,
+                rgba(255,255,255,0) 100%);
+            filter: drop-shadow(0 0 10px #ff69b4);
+            animation: cometFly 1.5s ease-out forwards;
+        }
+
+        @keyframes cometFly {
+            0% { transform: translate(-100%, -100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translate(100%, 100%); opacity: 0; }
+        }
+
+        @keyframes fadeOut {
+            to { opacity: 0; transform: translateY(-50px); }
+        }
+
+        button {
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1.2em;
+            padding: 15px 40px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            background: linear-gradient(45deg, var(--primary-color), var(--secondary-color));
+            color: white;
+            margin: 20px;
+            transition: all 0.4s ease;
+        }
+
+        button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 30px var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div id="greeting">Hola Estrella, soy Gustavo</div>
+        <div id="romantic-message">
+            "Eres mi lugar favorito en el universo,<br>
+            donde cada latido crea una nueva constelación.<br><br>
+            Tu sonrisa ilumina mi cielo más que todas las estrellas,<br>
+            y en tus ojos encuentro mi hogar eterno. 💖"
+        </div>
+        <button onclick="startAnimation()">Descubre mi corazón 🚀</button>
+    </div>
+
+    <script>
+        function startAnimation() {
+            const greeting = document.getElementById('greeting');
+            const message = document.getElementById('romantic-message');
+            const button = document.querySelector('button');
+
+            // Animación de despedida del saludo
+            greeting.style.animation = 'fadeOut 1s forwards';
+            
+            // Crear cometa
+            const comet = document.createElement('div');
+            comet.className = 'comet';
+            comet.style.top = greeting.offsetTop + 50 + 'px';
+            comet.style.left = greeting.offsetLeft + 'px';
+            document.body.appendChild(comet);
+
+            // Ocultar botón
+            button.style.opacity = '0';
+
+            // Mostrar mensaje después de la animación
+            setTimeout(() => {
+                greeting.style.display = 'none';
+                message.style.opacity = '1';
+                message.style.transform = 'translateY(0)';
+                comet.remove();
+            }, 1500);
+        }
+    </script>
+</body>
+</html>
